@@ -1,7 +1,9 @@
 package com.helmes.sectors.service;
 
 import com.helmes.sectors.dto.UserDto;
+import com.helmes.sectors.entity.Sector;
 import com.helmes.sectors.entity.User;
+import com.helmes.sectors.exception.SectorIdDoesNotExistException;
 import com.helmes.sectors.mapper.UserMapper;
 import com.helmes.sectors.repository.SectorRepository;
 import com.helmes.sectors.repository.UserRepository;
@@ -20,11 +22,10 @@ public class UserService {
 
     public void saveUser(UserDto userDto) {
         User user = userMapper.dtoToUser(userDto);
-        sectorRepository.findById(userDto.getSectorId()).ifPresentOrElse(
-                sector -> {
-                    user.setSector(sector);
-                    userRepository.save(user);
-                },
-                () -> log.error("Sector with ID: {}, is not present in database.", userDto.getSectorId()));
+        Sector sector = sectorRepository.findById(userDto.getSectorId()).orElseThrow(() ->
+                new SectorIdDoesNotExistException("Sector with ID: " + userDto.getSectorId() + ", does not exist.")
+        );
+        user.setSector(sector);
+        userRepository.save(user);
     }
 }
