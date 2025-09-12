@@ -1,0 +1,12 @@
+# Stack
+- Java 17
+- Spring Boot 3.5.5
+- Spring Web
+- Spring Data(JPA)
+- Spring Validation
+- Thymeleaf
+- Maven
+- Lombok
+- H2
+- Mapstruct
+- Flyway
