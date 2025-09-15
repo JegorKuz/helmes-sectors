@@ -6,6 +6,7 @@
 - Spring Validation (For DTO validation)
 - Spring Security (For session management, login)
 - Thymeleaf (For providing front-end using back-end)
+- Mapstruct (Avoid boilerplate code, good example of usage)
 - Maven (Dependencies)
 - Lombok (Avoiding boilerplate)
 - H2 (Local database, to avoid separately starting a database)
