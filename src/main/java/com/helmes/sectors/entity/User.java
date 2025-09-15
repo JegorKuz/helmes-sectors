@@ -23,12 +23,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 32)
+    @Column(name = "name", length = 32)
     private String name;
 
-    @Column(name = "terms", nullable = false)
+    @Column(name = "terms")
     private boolean terms;
 
     @ManyToOne
     private Sector sector;
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password_hash")
+    private String passwordHash;
 }

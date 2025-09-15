@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<script src="js/sector.js"></script>
+<script src="/js/sector.js"></script>
 Please enter your name and pick the Sectors you are currently involved in.
 <br />
 <br />
@@ -23,4 +23,6 @@ Sectors:
 
 <br />
 <br />
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
+<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 <input type="submit" value="Save" id="saveButton">

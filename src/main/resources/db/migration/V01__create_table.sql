@@ -7,8 +7,8 @@ CREATE TABLE sector (
 
 CREATE TABLE users (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(32) NOT NULL,
-    terms BOOLEAN NOT NULL,
+    name VARCHAR(32),
+    terms BOOLEAN,
     sector_id INT,
     FOREIGN KEY (sector_id) REFERENCES sector(id)
 );

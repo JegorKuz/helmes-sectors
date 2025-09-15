@@ -88,21 +88,24 @@ function handleSave() {
         return;
     }
 
+    const csrfToken = document.querySelector('input[name="_csrf"]').value;
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]').content;
+
     fetch('/api/v1/user/save', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                [csrfHeader]: csrfToken
             },
             body: JSON.stringify(formData),
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Something went wrong.');
+                throw new Error('Failed to save data. Please try again.');
             }
             alert('Data saved successfully!');
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('Failed to save data. Please try again.');
+            alert(error);
         });
 }

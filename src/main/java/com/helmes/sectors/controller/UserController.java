@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -22,7 +23,9 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveUser(@Valid @RequestBody UserDto userDto, BindingResult bindingResult) {
+    public ResponseEntity<?> saveUser(@Valid @RequestBody UserDto userDto,
+                                      BindingResult bindingResult,
+                                      Principal principal) {
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult.getAllErrors().stream()
                     .map(error -> error.getDefaultMessage())
@@ -31,7 +34,7 @@ public class UserController {
             return ResponseEntity.badRequest().body(errors);
         }
 
-        userService.saveUser(userDto);
+        userService.saveUser(principal.getName(), userDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("User saved successfully!");
     }
